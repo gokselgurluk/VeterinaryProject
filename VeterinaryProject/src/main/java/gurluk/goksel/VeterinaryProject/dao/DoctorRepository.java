@@ -1,0 +1,13 @@
+package gurluk.goksel.VeterinaryProject.dao;
+
+import gurluk.goksel.VeterinaryProject.entity.Doctor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+
+    List<Doctor> findByNameIgnoreCaseContaining(String name);
+}
