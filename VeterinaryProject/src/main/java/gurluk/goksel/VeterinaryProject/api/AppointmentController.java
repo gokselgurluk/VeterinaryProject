@@ -69,6 +69,7 @@ public class AppointmentController {
     }
 
     // Endpoint that creates a new appointment record
+    // 17 Proje isterlerine göre randevu kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<AppointmentResponse> save(@Valid @RequestBody AppointmentSaveRequest appointmentSaveRequest) {
@@ -76,6 +77,7 @@ public class AppointmentController {
         Appointment saveAppointment = modelMapper.forResponse().map(appointmentSaveRequest, Appointment.class);
 
         // Doktorun müsait günlerini kontrol etme
+        // 18 Randevu oluşturulurken, doktorun o saatte başka bir randevusu var mı, doktorun müsait günü var mı  kontrolü yapılıyor mu? Sadece randevusu yoksa ve müsait günü varsa randevu kaydına izin veriyor mu? (4 Puan)
         Doctor doctor = doctorService.get(appointmentSaveRequest.getDoctorId());
         if (!availableDateService.isDoctorAvailableOnDate(doctor.getId(), appointmentSaveRequest.getAppointmentDateTime().toLocalDate())) {
             return ResultHelper.errorWithData("Doktor müsait değil", null, HttpStatus.BAD_REQUEST);
@@ -143,6 +145,7 @@ public class AppointmentController {
 
 
     // Endpoint that retrieves appointments within a specific date range
+    // 20 Randevular kullanıcı tarafından girilen tarih aralığına ve doktora göre filtreleniyor mu? (4 Puan)
     @GetMapping("/filter/dateANDdoctor")
     public ResultData<List<AppointmentResponse>> getAppointmentsByDateRangeDoctor(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -168,6 +171,7 @@ public class AppointmentController {
 
         return ResultHelper.success(appointmentResponses);
     }
+    // 19 Randevular kullanıcı tarafından girilen tarih aralığına ve hayvana göre filtreleniyor mu? (4 Puan)
     @GetMapping("/filter/dateANDanimal")
     public ResultData<List<AppointmentResponse>> getAppointmentsByDateRangeAnimal(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,

@@ -33,14 +33,14 @@ public class VaccineController {
     private final IVaccineService vaccineService;
     private final IModelMapperService modelMapper;
     private final IAnimalService animalService ;
-
+// 21 Proje isterlerine göre hayvana ait aşı kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<VaccineResponse> save(@Valid @RequestBody VaccineSaveRequest vaccineSaveRequest ){
         Vaccine saveVaccine = this.modelMapper.forRequest().map(vaccineSaveRequest, Vaccine.class);
         Long animalId = vaccineSaveRequest.getAnimalId();
         // Hayvanın aynı kodla herhangi bir aktif aşısı var mı diye kontrol et
-
+// 22 Yeni aşı kaydetme işleminde koruyuculuk bitiş tarihi kontrolü yapılmış mı? Koruyuculuk tarihi bitmiş aşıların kaydı yapılıp, koruyuculuğu bitmemiş aşıların kaydı engellenmiş mi? (4 Puan)
         if (vaccineService.existsActiveVaccineByAnimalIdAndVaccineCode(animalId, vaccineSaveRequest.getCode())) {
             return ResultHelper.errorWithData("Bu hayvan için koruma süresi dolmamış bir aşı zaten mevcut.",null,HttpStatus.BAD_REQUEST);
         }
@@ -104,6 +104,7 @@ public class VaccineController {
 
         return ResultHelper.success(vaccineResponses);
     }*/
+   // 24 Belirli bir hayvana ait tüm aşı kayıtları (sadece bir hayvanın tüm aşı kayıtları) listelenebiliyor mu? (4 Puan)
     @GetMapping("/vaccines/List/{animalId}")
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<VaccineResponse>> getVaccinesForAnimal(@PathVariable("animalId") Long id) {
@@ -136,6 +137,7 @@ public class VaccineController {
 
         return ResultHelper.success(vaccineResponses);
     }
+    // 23 Aşı koruyuculuk bitiş tarihine göre filtreleme: girilen tarih aralığında aşı koruyuculuk bitiş tarihi olan aşılar hayvan bilgileriyle birlikte doğru bir şekilde listeleniyor mu? (4 Puan)
     @GetMapping("/animal/filter/vaccineFinishDate")
     public ResultData<List<VaccineResponse>> getVaccinesByAnimalAndDateRange(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,

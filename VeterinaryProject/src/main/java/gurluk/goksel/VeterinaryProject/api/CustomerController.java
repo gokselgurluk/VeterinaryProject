@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
         private final IModelMapperService modelMapper;
 
     // Yeni bir müşteri kaydetmek için POST endpoint'i
+    // 10 Proje isterlerine göre hayvan sahibi kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<CustomerResponse> save(@Valid @RequestBody CustomerSaveRequest customerSaveRequest ){
@@ -80,6 +81,7 @@ import java.util.stream.Collectors;
         return  ResultHelper.cursor(customerResponsePage);
     }
     //müşterileri isme göre filtreleyen bir endpoint
+    // 11 Hayvan sahipleri isme göre filtreleniyor mu? (4 Puan)
     @GetMapping("/filter/Name") //http://localhost:8047/v1/customers/filter?name=John Doe örnek aram URL'si
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<CustomerResponse>> getCustomersByName(@RequestParam("name") String name) {

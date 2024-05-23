@@ -43,6 +43,7 @@ public class AnimalController {
     }
 
     // Yeni hayvan ekleme endpoint'i
+  // 12   Proje isterlerine göre hayvan kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<AnimalResponse> save(@Valid @RequestBody AnimalSaveRequest animalSaveRequest ){
@@ -120,6 +121,7 @@ public class AnimalController {
         // Sonuç dönüşü yapılıyor
         return  ResultHelper.cursor(animalResponsePage);
     }
+    // 13 Hayvanlar isme göre filtreleniyor mu? (4 Puan)
     @GetMapping("/filter/animal/{name}") //http://localhost:8047/v1/animals/filter?name=
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<AnimalResponse>> getAnimalsByName(@RequestParam("name") String name) {
@@ -132,6 +134,7 @@ public class AnimalController {
 
         return ResultHelper.success(animalResponses);
     }
+    // 14 Girilen hayvan sahibinin sistemde kayıtlı tüm hayvanlarını görüntüleme (sadece bir kişiye ait hayvanları görüntüle işlemi) başarılı bir şekilde çalışıyor mu? (4 Puan)
     @GetMapping("/filterCustomerId/{customerId}")
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<AnimalResponse>> getAnimalsByCustomerId(@PathVariable("customerId") Long customerId) {
@@ -144,6 +147,7 @@ public class AnimalController {
 
         return ResultHelper.success(animalResponses);
     }
+    // 14 Girilen hayvan sahibinin sistemde kayıtlı tüm hayvanlarını görüntüleme (sadece bir kişiye ait hayvanları görüntüle işlemi) başarılı bir şekilde çalışıyor mu? (4 Puan)
     @GetMapping("/filterCustomerName/{customerName}")
     @ResponseStatus(HttpStatus.OK)
     public ResultData<List<AnimalResponse>> getAnimalsByCustomerName(@PathVariable("customerName") String customerName) {

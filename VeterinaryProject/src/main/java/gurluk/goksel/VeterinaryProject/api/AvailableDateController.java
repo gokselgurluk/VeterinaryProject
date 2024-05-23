@@ -74,6 +74,7 @@ public class AvailableDateController {
 
 
     // Yeni bir kullanılabilir veri kaydı oluşturan  end point
+    // 16 Proje isterlerine göre doktor müsait günü kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<AvailableDataResponse> save(@Valid @RequestBody AvailableDateSaveRequest availableDateSaveRequest ){

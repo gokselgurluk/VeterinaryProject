@@ -41,6 +41,7 @@ public class DoctorConroller {
     }
 
     // Yeni bir doktor kaydetmek için POST endpoint'i
+    // 15 Proje isterlerine göre doktor kaydediliyor mu? (4 puan)
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
     public ResultData<DoctorResponse> save(@Valid @RequestBody DoctorSaveRequest doctorSaveRequest ){

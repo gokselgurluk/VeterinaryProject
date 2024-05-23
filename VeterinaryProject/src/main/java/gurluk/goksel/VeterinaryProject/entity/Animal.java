@@ -42,6 +42,8 @@ public class  Animal { //Animal Entitylerimizin bulundugu sınıfımız
         erkek,
         dişi,
     }
+// 9 Entity’ler arasındaki ilişkiler (@OneToMany, @ManyToOne, @ManyToMany vs.) doğru bir şekilde tanımlanmış mı? (4 Puan)
+
 
     @ManyToOne
     @JoinColumn(name = "customer_id")// Customer entity'sindeki id ile ilişkilendirir
